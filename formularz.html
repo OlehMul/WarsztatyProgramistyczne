@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+<body>
+<h1>Biblioteka  Akademicka - Resjestracja czytelnika</h1>
+<form action="resjestracja.php" method="post" enctype="multipart/form-data">
+  <fieldset>
+    <legend>Dane osobowe</legend>
+    <div>
+      <label for="name">Imię:</label>
+      <div>
+        <input type="text" id="name" name="name" required minlength="2"maxlength="50" placeholder="Wpisz imię" autofocus>
+      </div>
+    </div>
+
+    <div>
+      <label for="nazwisko">Nazwisko:</label>
+      <div>
+        <input type="text" id="nazwisko" name="nazwisko" required maxlength="60" placeholder="Wpisz nazwisko">
+      </div>
+    </div>
+
+
+    <label for="email">Adres e-mail: </label>
+    <div>
+      <input type="email" id="email" name="email" required multiple placeholder="adres@example.com">
+    </div>
+
+    <div>
+      <label for="Numer">Numer Telefonu:</label>
+      <div>
+        <input type="tel" id="Numer" name="Numer"pattern="[0-9]{9}" placeholder="123456789" >
+      </div>
+    </div>
+
+    <div>
+      <label for="Data">Data urodzenia</label>
+      <div>
+        <input type ="date" id="Data" min="1900-01-01" max="2026">
+      </div>
+    </div>
+
+    <div>
+      <label for="X">Płeć:</label>
+      <div>
+        <label for="man">Mężczyzna</label>
+        <input type="radio" id="man" name="Gender" value="Mężczyzna"></input>
+        <label for="woman">Kobieta</label>
+        <input type="radio" id="woman" name="Gender" value="Kobieta"></input>
+        <label for="inna">Inna</label>
+        <input type="radio" id="inna" name="Gender" value="Inna"></input>
+      </div>
+    </div>
+    <div>
+      <label for="pessel">Numer Pessel:</label>
+      <div>
+        <input type="password" id="pessel" name="pessel" autocomplete="off" pattern="[0-9]{2}-[0-9]{3}" placeholder="00-000"></input>
+      </div>
+
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Adres</legend>
+
+    <label for="ulica">Ulica i number:</label>
+    <div>
+      <input type="text" id="ulica" name="ulica" required placeholder="np. ul. Książkowa 5/10"></input>
+    </div>
+
+    <label for="kod">Kod pocztowy:</label>
+    <div>
+      <input type="text" id="kod" name="kod" pattern="[0-9{2}-[0-9]{3}" placeholder="00-000"></input>
+
+    </div>
+
+    <label for="miasto"> Miasto</label>
+    <div>
+      <input list="Miasta" id="miasto" name="miasto">
+      <datalist id="Miasta" >
+        <option value="Kraków"></option>
+        <option value="Poznań"></option>
+        <option value="Warszawa"></option>
+        <option value="Gdynia"></option>
+        <option value="Bydgoszcz"></option>
+        <option value="Gdańsk"></option>
+      </datalist>
+    </div>
+
+
+    <label for="Kraj">Kraj</label>
+    <div>
+      <select id="Kraj">
+        <optgroup label="Europe">
+          <option>Polska</option>
+          <option>Niemcy</option>
+          <option>Francja</option>
+          <option>Szwajcaria</option>
+        </optgroup>
+
+        <optgroup label="Asia">
+          <option>Japonia</option>
+          <option>Korea Południowa</option>
+          <option>Tailandia</option>
+          <option>Wietnam</option>
+
+        </optgroup>
+
+      </select>
+
+    </div>
+  </fieldset>
+
+  <fieldset>
+    <legend>Preferencje czytelnicze</legend>
+
+    <div>
+      <label for="X">Ulubione gatunki i literackie:</label>
+      <div>
+        <label for="pow">Powieść</label>
+        <input type="radio" id="pow" name="pref" value="Powieść"></input>
+        <label for="krymin">Kryminały</label>
+        <input type="radio" id="krymin" name="pref" value="Kryminały"></input>
+        <label for="fantasy">Fantasy</label>
+        <input type="radio" id="fantasy" name="pref" value="Fantasy"></input>
+
+        <label for="scifi">Science Fiction</label>
+        <input type="radio" id="scifi" name="pref" value="Science Fiction"></input>
+        <label for="history">Historia</label>
+        <input type="radio" id="history" name="pref" value="History"></input>
+
+        <label for="nauka">Poplarnonaukowe</label>
+        <input type="radio" id="nauka" name="pref" value="nauka"></input>
+      </div>
+    </div>
+    <label for="X"> Liczba wypożycznaych książek miesięcznie:</label>
+    <div>
+      <input type="number" min="1" max="20" step="1" value="3">
+    </div>
+
+    <label for="X">Preferowana pora odwiedzin</label>
+    <div>
+      <input type="time" min="7:00" max="22:00">
+    </div>
+
+    <label for="r">Aktywność czytelnicza</label>
+    <div>
+      <input id="r" name="r" type="range" min="0" max="10" step="1" value="5">
+      <output for="r" name="r">5</output>
+    </div>
+
+    <label for="X">Ulubiony kolor okladki</label>
+    <div>
+      <input type="color" value="#3498db">
+    </div>
+
+    <label for="X"> Link do profilu czytelnika(blog/strona)</label>
+    <div>
+      <input type="url" placeholder="https://">
+    </div>
+
+    <label for="X">Wgranie zdjęcia legitymacyjnego</label>
+    <div>
+      <input type="file" accept="image/png, image/jpeg">
+    </div>
+
+    <label for="X">Komentarz/uwagi</label>
+    <div>
+      <textarea rows="5" cols="50" max.length="500" placeholder="Wpisz dodatkowe uwagi (max 500 znaków"></textarea>
+    </div>
+
+  </fieldset>
+
+  <label for="X">Wypelnienie profilu:</label>
+  <div>
+    <meter value="0.4" min="0" max="1" low="0.3" high="0.7" optimum="0.9"></meter>
+  </div>
+  <label for="X">Postęp weryfikacji konta:</label>
+  <div>
+    <progress value="25" max="100"></progress>
+  </div>
+  <button type="submit">Zrejestruj się</button>
+  <button type="reset" id="X">Wyczyść formularz</button>
+</form>
+</body>
+</html>
