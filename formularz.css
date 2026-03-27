@@ -1,0 +1,98 @@
+body{
+  background-color: hsl(36, 100%, 90%); /* blanchedalmond */
+}
+
+#HE{
+  background-color: hsl(28, 100%, 80%); /* #ffb879 */
+}
+#HE1{
+  text-align: center;
+  font-family: Times New Roman;
+  text-shadow: rgba(85, 85, 85, 1) 3px 3px 3px; /* #555555 */
+  text-transform: uppercase;
+}
+
+#HE2{
+  text-align: center;
+  font-style: italic;
+  font-family: Georgia;
+  color: darksalmon;
+}
+
+#NAV a:visited{
+  color: darkolivegreen;
+}
+
+#ok{
+  background-color: hsl(60, 56%, 91%); /* beige */
+  line-height: 2em;
+}
+#ok legend{
+  color: #4f542d;
+  font-size: larger;
+}
+
+#AD{
+  background-color: hsl(30, 58%, 85%); /* #EED9C4 */
+  line-height: 2em;
+}
+#AD legend{
+  color: #4f3114;
+  font-size: larger;
+  font-family: Calibri;
+}
+#PREF{
+  background-color: hsl(38, 61%, 80%); /* #ebd5ae */
+  line-height: 2em;
+}
+#PREF legend{
+  font-size: larger;
+  color:#38290c;
+  text-transform: uppercase;
+  font-style: italic;
+}
+
+#name{ background-color: #f1f8f1; }
+#nazwisko{ background-color: #edf8ed; }
+#email{ background-color: #d0e8e1; }
+#Numer{ background-color: #d9ffff; }
+#Data{ background-color: #e9f8f0; }
+#pessel{ background-color: #cfddd7; }
+
+#ulica{
+  background-color: hsl(28, 62%, 71%); /* #e2b387 */
+}
+#kod{
+  background-color: hsl(28, 73%, 92%); /* #f7ebdf */
+}
+#miasto{
+  background-color: hsl(32, 64%, 81%); /* #ecceb2 */
+}
+
+#re{
+  color: #4f542d;
+  font-style: oblique;
+}
+#n{ background-color: hsl(30, 58%, 85%); } /* #EED9C4 */
+#godz{ background-color: hsl(32, 64%, 81%); } /* #ecceb2 */
+
+#lin{
+  background-color: rgba(153, 153, 153, 1); /* #999999 */
+}
+#kom{
+  background-color: hsl(120, 100%, 97%); /* honeydew */
+}
+
+#X{
+  background-color: rgba(136, 136, 136, 1); /* #888888 */
+}
+#sub{
+  text-transform: uppercase;
+  background-color: hsl(28, 62%, 71%); /* #e2b387 */
+  border-radius: 5px;
+  letter-spacing: 2px;
+}
+footer{
+  text-align: center;
+  background-color: hsl(28, 100%, 80%); /* #ffb879 */
+}

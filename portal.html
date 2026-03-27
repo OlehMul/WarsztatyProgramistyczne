@@ -7,6 +7,10 @@
   <meta name="description" content="Portal Sportowy EPP — aktualności, tabela ligowa, wyniki meczów">
   <meta name="author" content="Redakcja Portalu Sportowego">
   <link rel="canonical" href="#">
+  <link href="portal.css" rel="stylesheet"
+        type="text/css">
+
+
   <noscript>Ta strona wymaga włączonej obsługi JavaScript.</noscript>
 </head>
 <body>
@@ -14,18 +18,20 @@
 <header id="top">
   <h1>Portal Sportowy - <abbr title="Ekstraklasa Piłkarska Polska">EPP</abbr></h1>
   <nav>
-    <ul>
+    <ul  class="nav-lista">
       <li><a href="#top">Strona główna</a>
         <ul>
           <li><a href="#aktualnosci">Aktualności</a></li>
           <li><a href="#redakcja">O redakcji</a></li>
         </ul>
+        <hr>
       </li>
       <li><a href="#tabela">Tabela ligowa</a>
         <ul>
           <li><a href="#sezon">Sezon 2025/2026</a></li>
           <li><a href="#archiwum">Archiwum</a></li>
         </ul>
+        <hr>
       </li>
       <li><a href="#wyniki">Wyniki meczów</a>
         <ul>
@@ -41,6 +47,7 @@
 
   <article>
     <h2 id="sezon">Przegląd sezonu 2025/26 - 10 marca 2026</h2>
+    <p class="lead">Sezon 2025/26 zapisze się w historii polskiej pilki nóżnej jako jeden z najbardzjiej zaciętych - po 25 kolejkach zaledwie dwa punkty dzielą dwie czolowe drużyny</p>
     <time datetime="2026-03-10"></time>
     <address>smthsmth@gmail.com</address>
     <p>
@@ -56,17 +63,19 @@
   <h2 id="tabela">Tabela EPP - sezonu 2025/26</h2>
 
   <table border="3" width="700">
-    <caption><b>Tabela ligowa EPP - po 25. kolejce (stan na 10.03.2026)</b></caption>
+
     <colgroup>
-      <col bgcolor="#f0f0f0">
-      <col bgcolor="#fff8e1">
-      <col bgcolor="#e8f5e9">
-      <col bgcolor="#e8f5e9">
-      <col bgcolor="#e8f5e9">
-      <col bgcolor="#e8f5e9">
-      <col bgcolor="#fce4ec">
-      <col bgcolor="#e0f7fa">
+      <col class="first">
+      <col class="second">
+      <col  class="third">
+      <col class="third">
+      <col class="third">
+      <col class="third">
+      <col class="fourth">
+      <col class="fifth">
     </colgroup>
+
+    <caption><b>Tabela ligowa EPP - po 25. kolejce (stan na 10.03.2026)</b></caption>
     <thead>
     <tr>
       <th rowspan="2" scope="col">Lp.</th>
@@ -76,10 +85,10 @@
       <th rowspan="2" scope="col">Pkt</th>
     </tr>
     <tr>
-      <th scope="col">M</th>
-      <th scope="col">W</th>
-      <th scope="col">R</th>
-      <th scope="col">P</th>
+      <th class="m" scope="col">M</th>
+      <th class="m"scope="col">W</th>
+      <th class="m"scope="col">R</th>
+      <th class="m"scope="col">P</th>
     </tr>
     </thead>
     <tbody>
@@ -126,7 +135,7 @@
     </tr>
     </tbody>
     <tfoot>
-    <tr>
+    <tr class="last">
       <td colspan="2" align="center"><b>Suma / Średnia</b></td>
       <td><b>175</b></td>
       <td><b>75</b></td>
@@ -136,12 +145,17 @@
     </tr>
     </tfoot>
   </table>
+  <blockquote cite="#">
+<p> "Wierzymy w coś, nie wiemy tylko w co wierzyć"</p>
+    <p> &#9866Ktoś mądry, nie wiem skąd</p>
+
+  </blockquote>
 
   <figure>
     <picture id="archiwum">
       <source media="(min-width: 1200px)" srcset="h_992521935.jpg">
       <source media="(min-width: 800px)" srcset="panorama.jpg">
-      <img src="h_992521935.jpg" alt="Panorama stadionu" width="400" height="300">
+      <img class="pan" src="h_992521935.jpg" alt="Panorama stadionu" width="400" height="300">
     </picture>
     <figcaption>Stadion EPP podczas meczu Legia Warszawa vs Lech Poznań (fot. Redakcja PS)</figcaption>
   </figure>
@@ -220,15 +234,29 @@
   <h2>Mapa lig europejskich</h2>
   <p>Kliknij wybrany obszar mapy, aby przejść do odpowiedniej ligi:</p>
 
-  <img src="mapa_europy.jpg" alt="Mapa Europy z zaznaczonymi ligami" width="650" height="450" usemap="#mapa">
+  <img src="https://static.zpe.gov.pl/portal/f/res-minimized/RjkkIc4Sl6zUI/1716390014/16ByoVt2mXxARdeSFm15LfC7ScPE4VWF.png" alt="Mapa Europy z zaznaczonymi ligami" width="650" height="450" usemap="#mapa">
+
   <map name="mapa">
-    <area shape="rect"  coords="80,80,200,160"  href="premier-league.html" alt="Premier League (Anglia)">
-    <area shape="circle" coords="330,210,45" href="bundesliga.html"  alt="Bundesliga (Niemcy)">
-    <area shape="poly"   coords="310,310,360,290,390,330,350,360,300,345" href="ekstraklasa.html"    alt="Ekstraklasa (Polska)">
+    <area shape="rect" coords="145,185,195,270" href="premier-league.html" alt="Premier League (Anglia)">
+
+    <area shape="circle" coords="330,285,38" href="bundesliga.html" alt="Bundesliga (Niemcy)">
+
+    <area shape="rect" coords="415,210,510,300" href="ekstraklasa.html" alt="Ekstraklasa (Polska)">
   </map>
+  <section id="aktualnosci">
+    <h3>Aktualności</h3>
+    <ul>
+      <li><a href="#">Legia wygrywa derbi stolicy 3:1</a></li>
+      <li><a href="#">Lech Poznań sprowadza nowego napastnika</a></li>
+      <li><a href="#">Reprezentacja Polski - powolania na marzec</a></li>
+
+
+    </ul>
+
+  </section>
 
   <aside>
-
+<section>
     <h2>Słownik terminów piłkarskich</h2>
     <dl>
       <dt><abbr title="Video Assistant Referee">VAR</abbr></dt>
@@ -250,7 +278,8 @@
       <dt>Dublet</dt>
       <dd>Zdobycie w jednym sezonie mistrzostwa kraju i pucharu krajowego przez ten sam klub.</dd>
     </dl>
-
+</section>
+    <section>
     <h2 id="kolejka">Transmisja na żywo — PZPN</h2>
     <iframe
       src="https://www.pzpn.pl"
@@ -284,7 +313,7 @@
         </ul>
       </li>
     </ol>
-
+    </section>
   </aside>
 
 </main>
@@ -294,11 +323,11 @@
     Redakcja Portalu Sportowego<br>
     ul. Sportowa 1, 00-001 Warszawa<br>
     E-mail: <a href="mailto:redakcja@portal-sportowy.pl">redakcja@portal-sportowy.pl</a><br>
-    Telefon: <a href="tel:+48221234567">+48 22 123 45 67</a>
+    Telefon: <a id="te" href="tel:+48221234567">+48 22 123 45 67</a>
   </address>
   <small>© <time datetime="2026">2026</time> Portal Sportowy — EPP. Wszelkie prawa zastrzeżone.</small>
   <br>
-  <a href="#top">Powrót na górę strony</a>
+  <a href="#top">&#8593 Powrót na górę strony</a>
 </footer>
 
 </body>
