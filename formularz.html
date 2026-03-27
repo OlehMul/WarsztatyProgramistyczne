@@ -2,32 +2,63 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>Title</title>
+  <title> Biblioteka</title>
+  <link href="formularz.css" rel="stylesheet"
+        type="text/css">
+
 </head>
+
+
 <body>
+<div id="HE" >
+<header>
+  <h1 id="HE1"> Biblioteka Akademicka</h1>
+  <p id="HE2">Wiedza otwiera drzwi - zapisz się i czytaj bez granic</p>
+</header>
+</div>
+<nav id="NAV">
+  <ol class="breadcrumb">
+    <li><a href="#ok">Dane Osobowe</a></li>
+    <li><a href="#AD">Adres</a></li>
+    <li><a  href="#PREF">Preferencje czytelnika</a></li>
+
+
+  </ol>
+
+</nav>
+
+<main>
+  <p class="info"></p>
+
+
 <h1>Biblioteka  Akademicka - Resjestracja czytelnika</h1>
 <form action="resjestracja.php" method="post" enctype="multipart/form-data">
-  <fieldset>
+
+  <fieldset id="ok">
     <legend>Dane osobowe</legend>
     <div>
+      <span class="required">*
       <label for="name">Imię:</label>
       <div>
         <input type="text" id="name" name="name" required minlength="2"maxlength="50" placeholder="Wpisz imię" autofocus>
       </div>
+      </span>
     </div>
-
     <div>
+      <span class="required">*
       <label for="nazwisko">Nazwisko:</label>
       <div>
         <input type="text" id="nazwisko" name="nazwisko" required maxlength="60" placeholder="Wpisz nazwisko">
       </div>
+      </span>
     </div>
 
-
+<span class="required">*
     <label for="email">Adres e-mail: </label>
     <div>
       <input type="email" id="email" name="email" required multiple placeholder="adres@example.com">
     </div>
+</span>
 
     <div>
       <label for="Numer">Numer Telefonu:</label>
@@ -43,7 +74,10 @@
       </div>
     </div>
 
+
+
     <div>
+      <span class="required">
       <label for="X">Płeć:</label>
       <div>
         <label for="man">Mężczyzna</label>
@@ -53,24 +87,30 @@
         <label for="inna">Inna</label>
         <input type="radio" id="inna" name="Gender" value="Inna"></input>
       </div>
+      </span>
     </div>
+
     <div>
+      <span class="required">*
       <label for="pessel">Numer Pessel:</label>
       <div>
+
         <input type="password" id="pessel" name="pessel" autocomplete="off" pattern="[0-9]{2}-[0-9]{3}" placeholder="00-000"></input>
       </div>
+      </span>
 
     </div>
+
   </fieldset>
 
-  <fieldset>
+
+  <fieldset id="AD">
     <legend>Adres</legend>
 
     <label for="ulica">Ulica i number:</label>
     <div>
       <input type="text" id="ulica" name="ulica" required placeholder="np. ul. Książkowa 5/10"></input>
     </div>
-
     <label for="kod">Kod pocztowy:</label>
     <div>
       <input type="text" id="kod" name="kod" pattern="[0-9{2}-[0-9]{3}" placeholder="00-000"></input>
@@ -90,7 +130,7 @@
       </datalist>
     </div>
 
-
+    <span class="required">*</span>
     <label for="Kraj">Kraj</label>
     <div>
       <select id="Kraj">
@@ -114,36 +154,36 @@
     </div>
   </fieldset>
 
-  <fieldset>
+  <fieldset id="PREF">
     <legend>Preferencje czytelnicze</legend>
 
     <div>
       <label for="X">Ulubione gatunki i literackie:</label>
-      <div>
+      <div id="re">
         <label for="pow">Powieść</label>
-        <input type="radio" id="pow" name="pref" value="Powieść"></input>
+        <input type="checkbox" id="pow" name="pref" value="Powieść"></input>
         <label for="krymin">Kryminały</label>
-        <input type="radio" id="krymin" name="pref" value="Kryminały"></input>
+        <input type="checkbox" id="krymin" name="pref" value="Kryminały"></input>
         <label for="fantasy">Fantasy</label>
-        <input type="radio" id="fantasy" name="pref" value="Fantasy"></input>
+        <input type="checkbox" id="fantasy" name="pref" value="Fantasy"></input>
 
         <label for="scifi">Science Fiction</label>
-        <input type="radio" id="scifi" name="pref" value="Science Fiction"></input>
+        <input type="checkbox" id="scifi" name="pref" value="Science Fiction"></input>
         <label for="history">Historia</label>
-        <input type="radio" id="history" name="pref" value="History"></input>
+        <input type="checkbox" id="history" name="pref" value="History"></input>
 
         <label for="nauka">Poplarnonaukowe</label>
-        <input type="radio" id="nauka" name="pref" value="nauka"></input>
+        <input type="checkbox" id="nauka" name="pref" value="nauka"></input>
       </div>
     </div>
     <label for="X"> Liczba wypożycznaych książek miesięcznie:</label>
-    <div>
-      <input type="number" min="1" max="20" step="1" value="3">
+    <div >
+      <input id="n"type="number" min="1" max="20" step="1" value="3">
     </div>
 
     <label for="X">Preferowana pora odwiedzin</label>
     <div>
-      <input type="time" min="7:00" max="22:00">
+      <input id="godz"  type="time" min="7:00" max="22:00">
     </div>
 
     <label for="r">Aktywność czytelnicza</label>
@@ -159,7 +199,7 @@
 
     <label for="X"> Link do profilu czytelnika(blog/strona)</label>
     <div>
-      <input type="url" placeholder="https://">
+      <input id="lin"  type="url" placeholder="https://">
     </div>
 
     <label for="X">Wgranie zdjęcia legitymacyjnego</label>
@@ -169,7 +209,7 @@
 
     <label for="X">Komentarz/uwagi</label>
     <div>
-      <textarea rows="5" cols="50" max.length="500" placeholder="Wpisz dodatkowe uwagi (max 500 znaków"></textarea>
+      <textarea id="kom" rows="5" cols="50" max.length="500" placeholder="Wpisz dodatkowe uwagi (max 500 znaków"></textarea>
     </div>
 
   </fieldset>
@@ -182,8 +222,14 @@
   <div>
     <progress value="25" max="100"></progress>
   </div>
-  <button type="submit">Zrejestruj się</button>
+  <button type="submit" id="sub">Zarejestruj się</button>
   <button type="reset" id="X">Wyczyść formularz</button>
 </form>
+</main>
+<footer>
+  <time datetime="2026"> &#xA9 2026 Biblioteka Akademicka</time>
+  <p>Kontakt: <a href="mailto:biblioteka@akademicka.pl">biblioteka@akademicka.pl</a></p>
+  <a href="mailto:"></a>
+</footer>
 </body>
 </html>
