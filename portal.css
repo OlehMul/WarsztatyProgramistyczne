@@ -31,8 +31,8 @@ h1{
 .lead{
 
   font-style: italic;
-  line-height: 30px;
-  font-size: larger;
+  line-height: 1.7em;
+  font-size: 1.15em;
 }
 
 h2{
@@ -104,6 +104,7 @@ table {
 }
 
 
+
 details{
   summary {
     color: #0B2A3A;
@@ -161,6 +162,11 @@ aside section h2,aside section h3 {
   color: #0B2A3A;
   font-variant: small-caps;
 }
+section{
+  dt{
+    font-weight: bold;
+  }
+}
 
 
 
@@ -204,6 +210,12 @@ a:last-child{
 
 
 }
+ var{
+   color: #0B2A3A;
+ }
+
+
+
 
 }
 
