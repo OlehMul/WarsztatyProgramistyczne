@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+  <link href="men.css" rel="stylesheet"
+        type="text/css">
+</head>
+<body>
+<header id="logo">
+  <div>
+  <h1>Menedżer zadań</h1>
+  </div>
+</header>
+<aside>
+  <form id="form">
+    <fieldset>
+    <h3> Dodaj zadanie</h3>
+
+      <label for="title">Tytuł zadania</label>
+      <div>
+      <input type="text" id="title" name="title" required>
+      </div>
+
+      <label for="category">Kategoria</label>
+      <div>
+        <select id="category" name="category">
+          <option>Praca</option>
+          <option>Dom</option>
+          <option>Nauka</option>
+          <option>Zdrowie</option>
+          <option>Inne</option>
+
+        </select>
+      </div>
+
+      <label for="priority">Kategoria</label>
+      <div>
+        <select id="priority" name="prior">
+          <option>Niski</option>
+          <option>Średni</option>
+          <option>Wysoki</option>
+        </select>
+      </div>
+
+      <label for="Date">Data wykonania</label>
+      <div>
+<input type="date" id="Date" name="date">
+      </div>
+
+      <label for="des">Opis</label>
+      <div>
+      <textarea id="des" name="description"></textarea>
+      </div>
+
+      <label for="status">Status</label>
+      <div>
+      <select id="status" name="status">
+        <option>Do zrobienia</option>
+        <option>W trakcie</option>
+        <option>Zakończone</option>
+      </select>
+      </div>
+
+      <div>
+      <button type="submit">Dodaj zadanie</button>
+      </div>
+    </fieldset>
+  </form>
+</aside>
+<div id="frommain">
+<main>
+  <div class="topBOXES" id="wsz">
+    <h2>6</h2>
+    <p>Wszystkie</p>
+
+  </div>
+
+  <div class="topBOXES" id="dozrob">
+    <h2>3</h2>
+    <p>Do zrobienia</p>
+
+  </div>
+
+  <div class="topBOXES" id="wtr">
+    <h2>2</h2>
+    <p>W Trakcie</p>
+
+  </div>
+
+  <div class="topBOXES" id="zakon">
+    <h2>1</h2>
+    <p>Zakończone</p>
+
+  </div>
+
+  <div>
+    <p id="bu">Sortuj:
+    <button id="tytl" class="but">Tytul&#8593 </button>
+    <button class="but">Priorytet</button>
+      <button class="but">Data</button>
+      <button class="but">Kategoria</button>
+    </p>
+  </div>
+
+
+
+  <div class="boxes" id="first box">
+<h3> Przygotuj prezentacje dla klienta
+  <p class="wysoki">Wysoki</p>
+</h3>
+    <p>Kategoria:Praca   Termin 2026-03-30</p>
+    <hr>
+<p>Prezentacja postępów w nowym projekcie webowym.</p>
+    <p class="wtrakcie">W trakcie</p>
+
+  </div>
+
+  <div class="boxes" id="second box">
+    <h3> Zakupy spożywcze
+      <p class="niski">Niski</p>
+    </h3>
+    <p>Kategoria:Dom   Termin 2026-03-26</p>
+    <hr>
+    <p>Coś.</p>
+    <p class="dozrobienia">Do zrobienia</p>
+
+  </div>
+
+  <div class="boxes" id="third box">
+    <h3> Nauka CSS - model pudełkowy
+      <p class="sredni">Średni</p>
+    </h3>
+    <p>Kategoria:Nauka   Termin 2026-04-02</p>
+    <hr>
+    <p>Coś.</p>
+    <p class="dozrobienia">Do zrobienia</p>
+
+  </div>
+
+  <div class="boxes" id="fourth box">
+    <h3> Oplacić rachunki
+      <p class="wysoki">Wysoki</p>
+    </h3>
+    <p>Kategoria:Dom   Termin 2026-08-12</p>
+    <hr>
+    <p>Coś.</p>
+    <p class="zakonczone">Zakończone</p>
+  </div>
+
+  <div class="boxes" id="fifth box">
+    <h3> Przegląd techniczny samochodu
+      <p class="sredni">Średni</p>
+    </h3>
+    <p>Kategoria:Inne   Termin 2026-04-01</p>
+    <hr>
+    <p>Coś.</p>
+    <p class="wtrakcie">W trakcie</p>
+
+  </div>
+
+  <div class="boxes" id="sixth box">
+    <h3>Wizyta u dentysty
+      <p class="niski">Niski</p>
+    </h3>
+    <p>Kategoria:Zdrowie   Termin 2026-04-15</p>
+    <hr>
+    <p>Coś.</p>
+    <p class="dozrobienia">Do zrobienia</p>
+
+  </div>
+
+</main>
+</div>
+
+</body>
+</html>

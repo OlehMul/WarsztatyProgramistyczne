@@ -1,0 +1,189 @@
+   #logo{
+     top: 0;
+      position: fixed;
+      background-color: #393943;
+      height: 60px;
+      z-index: 1;
+     width: 100%;
+     color: white;
+     padding-left:10px;
+
+    }
+
+   *{
+     margin: 0;
+   }
+
+  fieldset{
+    border-style: none;
+    h3{
+      border-bottom-style: solid;
+    }
+  line-height: 1.5em;
+
+    top:60px;
+    width: 300px;
+    overflow: auto;
+    position: fixed;
+  }
+
+  hr{
+    border-style: dashed;
+  }
+  .wtrakcie{
+    border: 1px solid hsl(66, 95%, 42%);
+    border-radius: 10px;
+    background-color: hsla(66, 100%, 50%, 0.4);
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+  }
+  .dozrobienia{
+    border: solid 2px hsla(212, 68%, 52%, 0.73);
+    border-radius: 10px;
+    background-color: hsla(212, 67%, 56%, 0.42);
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+  }
+  .zakonczone{
+    border: rgba(101, 216, 12, 0.45) 2px solid;
+    border-radius: 10px;
+    background-color: hsla(93, 85%, 46%, 0.24);
+    padding-left: 10px;
+    padding-right: 10px;
+    display: inline-block;
+  }
+  main{
+    margin-top: 20px;
+  }
+.topBOXES{
+  display: inline-block;
+  border-radius: 10px;
+  h2{
+    text-align: center;
+  }
+  padding: 10px;
+  margin-bottom: 1em;
+  margin-right: 1em;
+}
+   #wsz{
+     border-top: black solid 3px;
+     background-color: hsl(0, 0%, 100%);
+   }
+   #dozrob{
+     border-top: hsl(216, 100%, 58%) solid 3px;
+     background-color: hsl(0, 0%, 100%);
+   }
+   #wtr{
+     border-top: hsl(34, 87%, 52%) solid 3px;
+     background-color: hsl(0, 0%, 100%);
+   }
+   #zakon{
+     border-top: hsl(98, 97%, 34%) solid 3px;
+     background-color: hsl(0, 0%, 100%);
+   }
+
+   #bu{
+     padding:10px;
+
+     .but{
+         margin-right:6px;
+        margin-bottom: 10px;
+        width: 80px;
+       padding:5px;
+ border-radius: 5px;
+     }
+     #tytl{
+       background-color: #4289da;
+       color: white;
+     }
+
+
+   }
+
+
+.boxes{
+  overflow: hidden;
+  padding: 2em;
+  line-height: 1.5em;
+  border-radius: 10px;
+
+
+  margin-bottom: 10px;
+}
+   #first\ box, #fourth\ box{
+     border: 2px solid #f16363;
+     border-left:5px solid red;
+     background-color: hsla(0, 88%, 71%, 0.22);
+   }
+#second\ box, #sixth\ box{
+  border: 2px solid #41ac03;
+  border-left:5px solid #41ac03;
+  background-color: hsla(80, 71%, 35%, 0.15);
+}
+   #third\ box, #fifth\ box{
+     border: 2px solid rgba(239, 148, 27, 0.4);
+     border-left:5px solid #da7f08;
+     background-color: hsla(52, 87%, 52%, 0.26);
+   }
+
+
+   #frommain {
+     z-index: 2;
+     background-color: rgba(136, 130, 130, 0.2);
+     margin-left: 320px;
+     padding: 20px;
+     border-left: 2px solid #acabaa;
+margin-top: 60px;
+     min-height: calc(100vh - 60px);
+   }
+
+   aside{
+     input,select,textarea,button{
+       width: 100%;
+       box-sizing: border-box;
+     }
+     button{
+       border-radius: 5px;
+       background-color: #4289da;
+       color: white;
+     }
+
+   }
+
+   p.wysoki{
+     text-align: center;
+     color: white;
+     background-color: hsl(0, 66%, 39%);
+     border-radius: 10px;
+     border: 2px solid hsl(0, 68%, 23%);
+     display: inline-block;
+     padding-left: 5px;
+     padding-right: 5px;
+     margin-left: calc(100% - 60px);
+   }
+
+   p.sredni{
+     text-align: center;
+     color: white;
+     background-color: hsla(39, 80%, 47%, 0.84);
+     border-radius: 10px;
+     border: 2px solid hsl(66, 84%, 24%);
+     display: inline-block;
+     padding-left: 5px;
+     padding-right: 5px;
+     margin-left: calc(100% - 60px);
+   }
+
+   p.niski{
+     text-align: center;
+     color: white;
+     background-color: hsla(118, 81%, 35%, 0.84);
+     border-radius: 10px;
+     border: 2px solid hsl(107, 84%, 24%);
+     display: inline-block;
+     padding-left: 5px;
+     padding-right: 5px;
+     margin-left: calc(100% - 60px);
+   }
