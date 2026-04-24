@@ -1,30 +1,43 @@
    #logo{
+     display: flex;
+align-items: center;
      top: 0;
-      position: fixed;
+     div.headerthingy{
+       margin-right: 30px;
+     }
       background-color: #393943;
-      height: 60px;
-      z-index: 1;
+      height: 80px;
+      z-index: 200;
      width: 100%;
      color: white;
      padding-left:10px;
-
+     margin-right: auto;
     }
 
-   *{
+   #men{
+     margin-right: auto;
+     font-size: 35px;
+   }
+
+
+   body{
      margin: 0;
+     display:grid;
+     height: auto;
+
    }
 
   fieldset{
+    width: 100%;
     border-style: none;
     h3{
+      text-align: center;
       border-bottom-style: solid;
     }
   line-height: 1.5em;
-
-    top:60px;
-    width: 300px;
+    top:10px;
     overflow: auto;
-    position: fixed;
+    box-sizing: border-box;
   }
 
   hr{
@@ -36,57 +49,74 @@
     background-color: hsla(66, 100%, 50%, 0.4);
     padding-left: 10px;
     padding-right: 10px;
-    display: inline-block;
   }
   .dozrobienia{
     border: solid 2px hsla(212, 68%, 52%, 0.73);
     border-radius: 10px;
-    background-color: hsla(212, 67%, 56%, 0.42);
+    background-color: hsla(0, 67%, 56%, 0.42);
     padding-left: 10px;
     padding-right: 10px;
-    display: inline-block;
+
   }
   .zakonczone{
-    border: rgba(101, 216, 12, 0.45) 2px solid;
+    border: rgba(216, 12, 12, 0.45) 2px solid;
     border-radius: 10px;
     background-color: hsla(93, 85%, 46%, 0.24);
     padding-left: 10px;
     padding-right: 10px;
-    display: inline-block;
+
   }
-  main{
-    margin-top: 20px;
+
+  .box{
+    border:solid 1px black;
+    flex: 1;
+
   }
-.topBOXES{
-  display: inline-block;
-  border-radius: 10px;
+
+
+#topBoxes{
+display: flex;
+ flex-direction: row;
+  gap: 10px;
+
+
+justify-content: space-evenly;
+
   h2{
     text-align: center;
   }
   padding: 10px;
-  margin-bottom: 1em;
-  margin-right: 1em;
+
 }
-   #wsz{
+   .box1{
      border-top: black solid 3px;
+     border-radius: 10px;
      background-color: hsl(0, 0%, 100%);
+
+     text-align: center;
    }
-   #dozrob{
+   .box2{
      border-top: hsl(216, 100%, 58%) solid 3px;
+     border-radius: 10px;
      background-color: hsl(0, 0%, 100%);
+     text-align: center;
    }
-   #wtr{
+   .box3{
      border-top: hsl(34, 87%, 52%) solid 3px;
+     border-radius: 10px;
      background-color: hsl(0, 0%, 100%);
+     text-align: center;
    }
-   #zakon{
+   .box4{
      border-top: hsl(98, 97%, 34%) solid 3px;
+     border-radius: 10px;
      background-color: hsl(0, 0%, 100%);
+text-align: center;
    }
 
    #bu{
      padding:10px;
-
+     width: auto;
      .but{
          margin-right:6px;
         margin-bottom: 10px;
@@ -108,38 +138,38 @@
   padding: 2em;
   line-height: 1.5em;
   border-radius: 10px;
+  h1{
+    flex-grow: 1;
+  }
 
 
   margin-bottom: 10px;
 }
-   #first\ box, #fourth\ box{
-     border: 2px solid #f16363;
-     border-left:5px solid red;
-     background-color: hsla(0, 88%, 71%, 0.22);
-   }
-#second\ box, #sixth\ box{
-  border: 2px solid #41ac03;
-  border-left:5px solid #41ac03;
-  background-color: hsla(80, 71%, 35%, 0.15);
-}
-   #third\ box, #fifth\ box{
-     border: 2px solid rgba(239, 148, 27, 0.4);
-     border-left:5px solid #da7f08;
-     background-color: hsla(52, 87%, 52%, 0.26);
-   }
 
 
    #frommain {
+     grid-area: main;
      z-index: 2;
      background-color: rgba(136, 130, 130, 0.2);
-     margin-left: 320px;
+
+
      padding: 20px;
      border-left: 2px solid #acabaa;
-margin-top: 60px;
+
      min-height: calc(100vh - 60px);
    }
 
    aside{
+     overflow-y: auto;
+     grid-area: aside;
+     z-index: 300;
+     height: calc(100vh - 80px);
+     top: 80px;
+
+     position: sticky;
+
+
+
      input,select,textarea,button{
        width: 100%;
        box-sizing: border-box;
@@ -148,42 +178,222 @@ margin-top: 60px;
        border-radius: 5px;
        background-color: #4289da;
        color: white;
-     }
+       flex-basis: auto;
+       width: auto;
 
+     }
    }
 
-   p.wysoki{
+
+
+   .wysoki{
+     flex-shrink: 0;
+
+     display: flex;
      text-align: center;
      color: white;
      background-color: hsl(0, 66%, 39%);
      border-radius: 10px;
      border: 2px solid hsl(0, 68%, 23%);
-     display: inline-block;
+
      padding-left: 5px;
      padding-right: 5px;
-     margin-left: calc(100% - 60px);
+     margin-left: auto;
+     margin-bottom: auto;
+     margin-top: auto;
+
    }
 
-   p.sredni{
+   .sredni{
+     flex-shrink: 0;
+
+     display: flex;
+     align-content: center;
      text-align: center;
      color: white;
      background-color: hsla(39, 80%, 47%, 0.84);
      border-radius: 10px;
      border: 2px solid hsl(66, 84%, 24%);
-     display: inline-block;
+
      padding-left: 5px;
      padding-right: 5px;
-     margin-left: calc(100% - 60px);
+
+     margin-left: auto;
+     margin-bottom: auto;
+     margin-top: auto;
    }
 
-   p.niski{
+   .niski{
+     flex-shrink: 0;
+
+     display: flex;
      text-align: center;
      color: white;
      background-color: hsla(118, 81%, 35%, 0.84);
      border-radius: 10px;
      border: 2px solid hsl(107, 84%, 24%);
-     display: inline-block;
+
      padding-left: 5px;
      padding-right: 5px;
-     margin-left: calc(100% - 60px);
+
+     margin-left: auto;
+     margin-bottom: auto;
+     margin-top: auto;
+
    }
+
+   .forGrid {
+     display: grid;
+     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+     grid-auto-columns: auto;
+     gap: 10px;
+
+   }
+
+   #first\ box{
+     border: 2px solid #f16363;
+     border-left:5px solid red;
+     background-color: hsla(0, 88%, 71%, 0.22);
+     grid-column: span 4;
+   }
+   #second\ box, #sixth\ box{
+     border: 2px solid #41ac03;
+     border-left:5px solid #41ac03;
+     background-color: hsla(80, 71%, 35%, 0.15);
+   }
+   #fifth\ box{
+     border: 2px solid rgba(239, 148, 27, 0.4);
+     border-left:5px solid #da7f08;
+     background-color: hsla(52, 87%, 52%, 0.26);
+     grid-row: span 2;
+   }
+   #eights\ box, #seventh\ box{
+     border: 2px solid rgba(239, 148, 27, 0.4);
+     border-left:5px solid #da7f08;
+     background-color: hsla(52, 87%, 52%, 0.26);
+   }
+   #fourth\ box{
+     border: 2px solid #f16363;
+     border-left:5px solid red;
+     background-color: hsla(0, 88%, 71%, 0.22);
+
+   }
+   #third\ box{
+     border: 2px solid rgba(239, 148, 27, 0.4);
+     border-left:5px solid #da7f08;
+     background-color: hsla(52, 87%, 52%, 0.26);
+   }
+
+   .SORT{
+     display: flex;
+     flex-wrap: wrap;
+     width: auto;
+   }
+
+   .TestForCenter{
+     display: flex;
+
+   }
+
+   #submit{
+     display: flex;
+     button{
+       margin-top: 20px;
+       width: 100%;
+       padding: 10px;
+     }
+
+   }
+
+   .opis{
+     flex-grow: 1;
+   }
+
+   #WholeThing{
+     display: grid;
+     grid-template-areas:
+      "header header"
+      "aside main"
+   "footer footer";
+     grid-template-columns: 280px 1fr;
+     grid-template-rows: 60px;
+     min-height: 100vh;
+   }
+
+header{
+  grid-area: header;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+}
+
+   .leftside{
+     display: flex;
+     grid-area: leftside;
+     flex-direction: column;
+   }
+   .rightside{
+     display: flex;
+     flex-direction: column;
+
+     align-items: center;
+     grid-area: rightside;
+     border-radius: 20px;
+     background-color: rgba(221, 223, 223, 0.67);
+     padding: 10px;
+     .wysoki{
+       margin: 0;
+
+     }
+
+   }
+
+.zadanie{
+
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  grid-template-areas:
+    "leftside rightside";
+  align-items: start;
+border-radius: 20px;
+  border: rgba(0, 0, 0, 0.54) 2px solid;
+  margin: auto;
+  padding: 20px;
+  border-left: 7px solid #3c93e8;
+  flex-wrap: wrap;
+  p4{
+    font-size: larger;
+    font-weight: bold;
+    color: #3c93e8;
+  }
+p3{
+  font-size: x-large;
+
+  font-weight: bolder;
+}
+  p{
+
+    font-size: larger;
+  }
+
+
+}
+.link{
+  text-decoration: none;
+  color: #3c93e8;
+
+}
+.link:hover{
+  color: #d9ffff;
+
+}
+
+.link:visited {
+  color: seagreen;
+  border-radius: 10px;
+  border: 3px solid rgba(137, 207, 69, 0.4);
+  background-color: rgba(46, 139, 87, 0.28);
+}
+
+
