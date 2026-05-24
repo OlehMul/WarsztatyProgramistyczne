@@ -2,9 +2,7 @@
     display: flex;
     align-items: center;
     top: 0;
-    div.headerthingy{
-        margin-right: 30px;
-    }
+
     background-color: #393943;
     height: 80px;
     z-index: 200;
@@ -12,6 +10,9 @@
     color: white;
     padding-left:10px;
     margin-right: auto;
+}
+#logo .headerthingy{
+    margin-right: 30px;
 }
 
 #men{
@@ -22,27 +23,26 @@
 
 body{
     margin: 0;
-    display:grid;
-    height: auto;
-
 }
+
 
 fieldset{
     width: 100%;
     border-style: none;
-    h3{
-        text-align: center;
-        border-bottom-style: solid;
-    }
+
     line-height: 1.5em;
     top:10px;
     overflow: auto;
     box-sizing: border-box;
 }
 
-hr{
-    border-style: dashed;
+fieldset h3{
+    text-align: center;
+    border-bottom-style: solid;
 }
+
+
+
 .wtrakcie{
     border: 1px solid hsl(66, 95%, 42%);
     border-radius: 10px;
@@ -64,122 +64,150 @@ hr{
     background-color: hsla(93, 85%, 46%, 0.24);
     padding-left: 10px;
     padding-right: 10px;
+}
+.czas{
+    border-top: rgb(241 38 38 / 0.55) solid 3px;
+    border-radius: 10px;
+
+
+    text-align: center;
 
 }
 
 .box{
-    border:solid 1px black;
+    border: solid 1px rgba(255,255,255,0.2);
+
     flex: 1;
 
 }
+footer {
+    grid-area: footer;
+}
+
 
 
 #topBoxes{
     display: flex;
     flex-direction: row;
-    gap: 10px;
-
-
-    justify-content: space-evenly;
-
-    h2{
-        text-align: center;
-    }
+    gap: 20px;
+    justify-content: space-between;
     padding: 10px;
+    width: 100%;
+}
 
+#topBoxes .box {
+    flex: 1;
+    min-width: 100px;
+    padding: 15px 10px;
+    background-color: rgba(255,255,255,0.05);
+    border-radius: 12px;
+}
+
+#topBoxes  h2{
+    text-align: center;
 }
 .box1{
     border-top: black solid 3px;
     border-radius: 10px;
-    background-color: hsl(0, 0%, 100%);
+
 
     text-align: center;
 }
 .box2{
     border-top: hsl(216, 100%, 58%) solid 3px;
     border-radius: 10px;
-    background-color: hsl(0, 0%, 100%);
+
     text-align: center;
 }
 .box3{
     border-top: hsl(34, 87%, 52%) solid 3px;
     border-radius: 10px;
-    background-color: hsl(0, 0%, 100%);
+
     text-align: center;
 }
 .box4{
     border-top: hsl(98, 97%, 34%) solid 3px;
     border-radius: 10px;
-    background-color: hsl(0, 0%, 100%);
+
+    text-align: center;
+}
+.box5{
+    border-top: hsl(358 97% 34% / 0.58) solid 3px;
+    border-radius: 10px;
+
     text-align: center;
 }
 
-#bu{
-    padding:10px;
-    width: auto;
-    .but{
-        margin-right:6px;
-        margin-bottom: 10px;
-        width: 80px;
-        padding:5px;
-        border-radius: 5px;
-    }
-    #tytl{
-        background-color: #4289da;
-        color: white;
-    }
+#bu .but{
+    margin-right:6px;
+    margin-bottom: 10px;
+    padding: 8px 12px;
+    border-radius: 5px;
+    background-color: #e0e0e0;
+    border: none;
+    cursor: pointer;
+}
 
-
+#bu #tytl{
+    background-color: #4289da;
+    color: white;
 }
 
 
 .boxes{
+    background-color: rgb(118 228 219 / 0.49);
     overflow: hidden;
     padding: 2em;
     line-height: 1.5em;
     border-radius: 10px;
-    h1{
-        flex-grow: 1;
-    }
+    border: #375f8f 5px solid;
     margin-bottom: 10px;
+    width: 100%;
+    box-sizing: border-box;
+}
+.boxes h1{
+    flex-grow: 1;
 }
 
 
 #frommain {
     grid-area: main;
     z-index: 2;
-    background-color: rgba(136, 130, 130, 0.2);
-
-
+    background-color: rgb(170 158 158 / 0.2);
     padding: 20px;
     border-left: 2px solid #acabaa;
 
-    min-height: calc(100vh - 60px);
 }
 
 aside{
-    overflow-y: auto;
     grid-area: aside;
-    z-index: 300;
-    height: calc(100vh - 80px);
-    top: 80px;
-
     position: sticky;
+    top: 80px;
+    align-self: start;
 
+    z-index: 999999;
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+}
 
+aside{
+    align-self:start;
+}
 
-    input,select,textarea,button{
-        width: 100%;
-        box-sizing: border-box;
-    }
-    button{
-        border-radius: 5px;
-        background-color: #4289da;
-        color: white;
-        flex-basis: auto;
-        width: auto;
+aside input,
+aside select,
+aside textarea,
+aside button{
+    width:100%;
+    box-sizing:border-box;
+}
+aside button{
+    border-radius: 5px;
+    background-color: #4289da;
+    color: white;
+    flex-basis: auto;
+    width: auto;
 
-    }
 }
 
 
@@ -295,12 +323,13 @@ aside{
 
 #submit{
     display: flex;
-    button{
-        margin-top: 20px;
-        width: 100%;
-        padding: 10px;
-    }
 
+
+}
+#submit button{
+    margin-top: 20px;
+    width: 100%;
+    padding: 10px;
 }
 
 .opis{
@@ -308,14 +337,15 @@ aside{
 }
 
 #WholeThing{
-    display: grid;
+    display:grid;
     grid-template-areas:
-      "header header"
-      "aside main"
-   "footer footer";
-    grid-template-columns: 280px 1fr;
-    grid-template-rows: 60px;
-    min-height: 100vh;
+        "header header"
+        "aside main"
+        "footer footer";
+    grid-template-columns: 300px 1fr;
+    grid-template-rows: auto 1fr auto;
+    min-height:100vh;
+    align-items:start;
 }
 
 header{
@@ -329,53 +359,82 @@ header{
     display: flex;
     grid-area: leftside;
     flex-direction: column;
+
 }
 .rightside{
     display: flex;
     flex-direction: column;
 
-    align-items: center;
+align-self: center;
+   align-content: center;
     grid-area: rightside;
     border-radius: 20px;
-    background-color: rgba(221, 223, 223, 0.67);
+    background-color: rgba(255, 255, 255, 0.1);
     padding: 10px;
-    .wysoki{
-        margin: 0;
 
-    }
+
+}
+.rightside .wysoki{
+    margin: 0;
+
 
 }
 
 .zadanie{
+    min-height: 150px;
+    align-items: start;
 
-    background-color: #ffffff;
+    border: 2px solid #b0b0b8;
+    border-left: 7px solid #3c93e8;
+    color: inherit;
+    border-radius: 20px;
+    margin: 0 0 25px 0;
+    padding: 20px;
     display: grid;
     grid-template-columns: 2fr 1fr;
-    grid-template-areas:
-    "leftside rightside";
-    align-items: start;
-    border-radius: 20px;
-    border: rgba(0, 0, 0, 0.54) 2px solid;
-    margin: auto;
-    padding: 20px;
-    border-left: 7px solid #3c93e8;
-    flex-wrap: wrap;
-    p4{
-        font-size: larger;
-        font-weight: bold;
-        color: #3c93e8;
-    }
-    p3{
-        font-size: x-large;
+    grid-template-areas: "leftside rightside";
+    overflow: hidden;
+    width: 100%;
+    box-sizing: border-box;
+}
 
-        font-weight: bolder;
-    }
-    p{
+.leftside {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
 
-        font-size: larger;
-    }
+.rightside {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 10px;
+}
+
+.rightside .wysoki,
+.rightside .wtrakcie,
+.rightside .dozrobienia,
+.rightside .zakonczone {
+    display: inline-block;
+    padding: 5px 12px;
+    margin: 0;
+}
 
 
+
+.zadanie.p4{
+    font-size: larger;
+    font-weight: bold;
+    color: #3c93e8;
+}
+.zadanie.p3{
+    font-size: x-large;
+
+    font-weight: bolder;
+}
+.zadanie.p{
+
+    font-size: larger;
 }
 .link{
     text-decoration: none;
@@ -394,7 +453,111 @@ header{
     background-color: rgba(46, 139, 87, 0.28);
 }
 
-.tag{
+.formTHEME{
+
+    border: #aa6418 5px solid;
+    padding: 20px;
+
+
+
+}
+.formTHEME button{
+    width: 100%;
+    background-color: #41ac03;
+}
+.formSORT{
+
+    border: 5px solid rgb(129 96 96 / 0.2);
+    border-radius: 5px;
+    padding: 20px;
+
+}
+.formSORT button{
+    width: 100%;
+    background-color: #41ac03;
+}
+
+.formNUM{
+    border: 5px solid black;
+    border-radius: 5px;
+    padding: 20px;
+}
+.formNUM button{
+    width: 100%;
+    background-color: #41ac03;
+}
+
+
+#login_main{
+
+    display: flex;
+ justify-content: center;
+    min-height: 50vh;
+    align-items: center;
+
+}
+
+
+
+#g{
+    display: grid;
+    grid-template-areas:
+     "h"
+    "coolm"
+               ;
+
+}
+
+#h{
+    grid-area: h;
+    align-content: center;
+}
+
+#firstPart{
+    display:flex;
+    border: rgb(89 232 38 / 0.79) 3px solid;
+    align-content: center;
+    flex-direction: column;
+    border-radius: 5px;
+    gap: 15px;
+    padding: 15px;
+    grid-area: coolm;
+
+
+}
+#firstPart button{
+    border-radius: 5px;
+    background-color: #41ac03;
+    width: 100%;
+
+
+}
+.well{
+    display:flex;
+    align-items: center;
+    flex-direction: column;
+
+}
+
+#LINK{
+    font-size: x-large;
+    text-decoration: none;
+
+}
+#LINK:hover{
+    color: darkgreen;
+    border: #41ac03 3px solid;
+    background-color: rgb(49 99 22 / 0.21);
+}
+
+#errorBox{
+    display: inline-block;
+    border: #b51111 5px solid;
+    align-content: center;
+    align-self: center;
+    padding: 20px;
+  margin-left: 45%;
+    margin-top: 15%;
 
 
 }
