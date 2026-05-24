@@ -12,9 +12,10 @@ if(!isset($_SESSION['login_time'])){
 }
 $_SESSION['last_update_time'] = time();
 
-
-$repo = new \forme\TaskRepository();
-$auth = new \forme\AuthService();
+$db = \forDataBase\DataBase::get();
+\forDataBase\DataBase::migrate();
+$repo = new \forme\TaskRepository($db);
+$auth = new \forme\AuthService($db);
 
 
 $pref = new \forme\UserPreferences($_COOKIE);
@@ -47,7 +48,7 @@ if(isset($_POST['confSearch'])){
 }
 
 if(isset($_POST['deleteTASK'])){
-   $repo->remove($_POST["delete_id"]);
+   $repo->remove((int)$_POST["delete_id"]);
 }
 if(isset($_POST['CHANGEstatus'])){
     $repo->findAndChnageStatus((int)$_POST['change_id'],$_POST['change_status']);
@@ -58,14 +59,14 @@ if(isset($_POST['CHANGEstatus'])){
 if(isset($_POST['submit']) && !empty($_SESSION['user'])){
     $made_up_tags = $_POST["textTags"];
     if(isset($_POST['cycle'])){
-        $tc  = new \forme\RecurringTask($repo->nextId(), $_POST['title'] ?? '', $_SESSION['user']->getLogin() ?? '', $_POST['estimated_minutes'], $_POST['description'] ?? '', $_POST['priority'] ?? '', $_POST['status'] ?? '', $_POST['tags'] ?? '', $_POST['category'], $made_up_tags,$_POST['interval']);
+        $tc  = new \forme\RecurringTask($repo, $_POST['title'] ?? '', $_SESSION['user']->getLogin() ?? '', $_POST['estimated_minutes'], $_POST['description'] ?? '', $_POST['priority'] ?? '', $_POST['status'] ?? '', $_POST['tags'] ?? '', $_POST['category'], $made_up_tags,$_POST['interval']);
         if (empty($tc->getErrorArray())) {
             $repo->add($tc);
             header('Location: index.php');
             exit();
         }
     }else {
-        $tt = new \forme\Task($repo->nextId(), $_POST['title'], $_SESSION['user']->getLogin(),$_POST['estimated_minutes'], $_POST['description'] ?? '', $_POST['priority'] ?? '', $_POST['status'], $_POST['tags'] ?? '', $_POST['category'], $made_up_tags);
+        $tt = new \forme\Task($_POST['title'], $auth->currentUser(),$_POST['estimated_minutes'], $_POST['description'] ?? '', $_POST['priority'] ?? '', $_POST['status'], $_POST['tags'] ?? '', $_POST['category'], $made_up_tags);
         if (empty($tt->getErrorArray())) {
             $repo->add($tt);
             header('Location: index.php');
@@ -128,7 +129,7 @@ $total_minutes = array_sum(array_map(fn($t) => $t->getEstimatedMinutes(), $allTa
         <div id="logo">
             <div id="men">Menedżer zadań</div>
             <div class="headerthingy"><a href="header.php" class="link">Prefferences</a></div>
-            <div class="headerthingy">Zalogowany jako <?php echo $_SESSION['user']->getLogin() ?></div>
+            <div class="headerthingy">Zalogowany jako <?php echo  $auth->currentUser()?></div>
             <div class="headerthingy">Czas trwania sesji:<?php echo gmdate('H:i:s',$_SESSION['last_update_time'] - (int)$_SESSION['login_time'])." s" ?></div>
             <div class="headerthingy"><a class="link" href="logout.php">Wyloguj</a></div>
             <div class="headerthingy" id="32"><a class="link" href="smth">Wszystkie</a></div>

@@ -9,9 +9,9 @@ class RecurringTask extends Task
     private $next;
 
 
-    function __construct($id, $title, $createdBy, $description, $priority, $status, $tags, $category, $made_up_tags, $interval)
+    function __construct($title, $createdBy, $description, $priority, $status, $tags, $category, $made_up_tags, $interval)
     {
-        parent::__construct($id, $title, $createdBy, $description, $priority, $status, $tags, $category, $made_up_tags);
+        parent::__construct($title, $createdBy, $description, $priority, $status, $tags, $category, $made_up_tags);
         $this->interval = $interval;
         $this->next = $this->nextOccurrence();
     }
@@ -42,6 +42,12 @@ class RecurringTask extends Task
         }else{
             parent::changeStatus($status);
         }
+    }
+
+
+    public function getInterval()
+    {
+        return $this->interval;
     }
 
 

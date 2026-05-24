@@ -31,7 +31,7 @@ private $error_array = [];
 
     private $estimated_minutes;
 
-    function __construct($id, $title, $createdBy,$estimated_minutes, $description = '', $priority= '', $status= '', $tags= '',$category="Praca", $made_up_tags='')
+    function __construct($title, $createdBy,$estimated_minutes, $description = '', $priority= '', $status= '', $tags= '',$category="Praca", $made_up_tags='')
     {
         if ($priority == self::PRIORITY_LOW || $priority == self::PRIORITY_MEDIUM || $priority == self::PRIORITY_HIGH) {
             $this->priority = $priority;
@@ -95,7 +95,6 @@ private $error_array = [];
         }
 
 
-        $this->id = $id;
         $this->title = $title;
         $this->createdBy = $createdBy;
         $this->description = $description;
@@ -275,7 +274,6 @@ private $error_array = [];
     }
    public function  toArray(){
         $ar = [
-            "id" => $this->id,
            "title" => $this->title,
             "category"=>$this->category,
            "description" => $this->description,
@@ -289,18 +287,28 @@ private $error_array = [];
 
 return $ar;
    }
+
+    /**
+     * @param mixed $id
+     */
+    public function setId($id): void
+    {
+        $this->id = $id;
+    }
+
     static function fromArray(array $data){
         $task = new Task(
-            $data['id'],
             $data['title'],
             $data['created_by'],
+            $data['estimated_minutes'] ?? '',
             $data['description'] ?? '',
             $data['priority'] ?? 'medium',
             $data['status'] ?? 'todo',
-            $data['tags'] ?? [],
-            $data['estimated_minutes'] ?? '',
-            $data['category'] ?? 'Praca'
+            json_decode($data['tags'] ?? []),
+            $data['category'] ?? 'Praca',
+
         );
+        $task->setId($data['id']);
         return $task;
     }
 

@@ -3,25 +3,38 @@
 namespace forme;
 
 class AuthService{
+    private $users;
+    function __construct($b){
+        $this->users = $b;
+    }
+function register(string $username, string $password){
+    $t = $this->users->prepare('INSERT INTO users (username, password) VALUES (:username, :password)');
+    $t->execute(array(':username' => $username, ':password' => password_hash($password, PASSWORD_DEFAULT)));
 
 
+}
 
     function login(string $username, string $password){
-        require_once("forme/User.php");
-        $accounts=["admin" =>password_hash("admin123", PASSWORD_DEFAULT),"user" =>password_hash("user123",PASSWORD_DEFAULT),"employee" =>password_hash("employee123", PASSWORD_DEFAULT)];
-        if(key_exists($username, $accounts)){
-            if(password_verify($password, $accounts[$username])){
-                session_regenerate_id(true);
-                $user = new User($username, $password);
-                $_SESSION['user'] = $user;
-                return true;
-            }else{
-                return false;
-            }
-        }else{
-            echo "No such account under this username exists";
-            return false;
+        $s = $this->users->prepare('SELECT * FROM users');
+        if(empty($s->fetchAll())){
+            $k = $this->users->prepare('INSERT INTO users (login, password_hash) VALUES (:username, :password)');
+            $k->execute(array(':username' => "admin", ':password' => password_hash("admin123", PASSWORD_DEFAULT)));
+
+            $k = $this->users->prepare('INSERT INTO users (login, password_hash) VALUES (:username, :password)');
+            $k->execute(array(':username' => "jan", ':password' => password_hash("haslo456", PASSWORD_DEFAULT)));
+
+            $k = $this->users->prepare('INSERT INTO users (login, password_hash) VALUES (:username, :password)');
+            $k->execute(array(':username' => "anna", ':password' => password_hash("anna789", PASSWORD_DEFAULT)));
         }
+
+
+    $t = $this->users->prepare('SELECT * FROM users WHERE login = :username');
+    $t->execute(array(':username' => $username));
+    $user = $t->fetch();
+    if(password_verify($password, $user['password_hash'])){
+$_SESSION['username'] = $user['username'];
+    }
+    return true;
 
     }
 
