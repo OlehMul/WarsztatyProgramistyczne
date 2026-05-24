@@ -1,9 +1,11 @@
 <?php
 session_start();
-require_once("forme/AuthService.php");
+require_once "forme/Autoloader.php";
 
+$db = \forDataBase\DataBase::get();
+\forDataBase\DataBase::migrate();
 
-$auth = new \forme\AuthService();
+$auth = new \forme\AuthService($db);
 
 
 $user ="";

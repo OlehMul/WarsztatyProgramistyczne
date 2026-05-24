@@ -10,50 +10,50 @@ class TaskRepository{
     private $tags;
 
 
-    function  __construct(){
-        if (!isset($_SESSION['tasks'])) {
-            $_SESSION['tasks'] = [];
-        }
-        $this->tasks = $_SESSION['tasks'];
+    function  __construct($a){
+        $this->tasks = $a;
 
 }
 
 
 function add(Task $task){
-$this->tasks[] = $task;
-    $_SESSION['tasks'] = $this->tasks;
+$t = $this->tasks->prepare("INSERT INTO tasks(type,title,description,priority,status,tags,created_at,created_by,interval) VALUES(:type,:title,:description,:priority,:status,:tags,:created_at,:created_by,:interval)");
+
+if($task instanceof RecurringTask){
+    $t->execute([':type' =>"1",':title'=>$task->getTitle(),':description'=>$task->getDescription(),':priority'=>$task->getPriority(),':status'=>$task->getStatus(),':tags'=>json_encode($task->getTags()),':created_at'=>$task->getCreatedAt(),':created_by'=>$task->getCreatedBy(),':interval'=>$task->getInterval()]);
+}else{
+    $t->execute([':type' =>"1",':title'=>$task->getTitle(),':description'=>$task->getDescription(),':priority'=>$task->getPriority(),':status'=>$task->getStatus(),':tags'=>json_encode($task->getTags()),':created_at'=>$task->getCreatedAt(),':created_by'=>$task->getCreatedBy(),]);
+}
 
 }
 function remove(int $id){
-    foreach ($this->tasks as $key => $task){
-    if($task->getId() == $id){
-        unset($this->tasks[$key]);
-    }
-}
-    $_SESSION['tasks'] = $this->tasks;
+ $t = $this->tasks->prepare("DELETE FROM tasks WHERE id=:id");
+ $t->execute([':id'=>$id]);
 return true;
 }
+
+
 function find(int $id){
-foreach($this->tasks as $task){
-    if($task->getId() == $id){
-        return $task;
-    }
-}
+$t = $this->tasks->prepare("SELECT * FROM tasks WHERE id=:id");
+$t->execute([':id'=>$id]);
+return $t->fetch();
 
 }
 
 function all(){
-return $this->tasks;
+        $r =[];
+$t = $this->tasks->prepare("SELECT * FROM tasks");
+$t->execute();
+$a = $t->fetchAll();
+foreach($a as $ts){
+    $r[] = Task::fromArray($ts);
+}
+return $r;
 }
 function filterByStatus(string $status){
-$newTasks = [];
-for($i = 0; $i < count($this->tasks); $i++){
-    if(preg_match("/".$status."/i", $this->tasks[$i]->getStatus())){
-        $newTasks[] = $this->tasks[$i];
-    }
-}
-return $newTasks;
-
+$t = $this->tasks->prepare('SELECT FROM tasks WHERE status = :status');
+$t->execute([':status'=>$status]);
+return $t->fetchAll();
 }
 
     function filterByTag($tag = null){
@@ -62,27 +62,29 @@ return $newTasks;
             return $this->tasks;
         }
 
-        $newTasks = [];
-        foreach($this->tasks as $task){
-            if(in_array($tagToFilter, $task->getTags())){
-                $newTasks[] = $task;
-            }
-        }
-        return $newTasks;
+     $t = $this->tasks->prepare('SELECT FROM tasks WHERE tags LIKE :tag');
+        $t->execute([':tag'=>'%'.$tag.'%']);
+        return $t->fetchAll();
     }
     function searchPattern(){
         $newTasks = [];
         foreach($this->tasks as $task){
             $found = false;
-            // Create a clone to avoid modifying the original task in session
+
             $highlightedTask = clone $task;
 
-            // Search and highlight in tags
+
+
+
+
+
+
             $highlightedTags = [];
             foreach($task->getTags() as $tag){
                 if(preg_match("/".$this->pattern."/i", $tag)){
                     $found = true;
                     $highlightedTags[] = preg_replace('/'.$this->pattern.'/i', "<mark>$0</mark>", $tag);
+
                 } else {
                     $highlightedTags[] = $tag;
                 }
@@ -91,25 +93,25 @@ return $newTasks;
                 $highlightedTask->setTags($highlightedTags);
             }
 
-            // Search and highlight in status
+
             if(preg_match("/".$this->pattern."/i", $task->getStatus())){
                 $found = true;
                 $highlightedTask->setStatus(preg_replace('/'.$this->pattern.'/i', "<mark>$0</mark>", $task->getStatus()));
             }
 
-            // Search and highlight in priority
+
             if(preg_match("/".$this->pattern."/i", $task->getPriority())){
                 $found = true;
                 $highlightedTask->setPriority(preg_replace('/'.$this->pattern.'/i', "<mark>$0</mark>", $task->getPriority()));
             }
 
-            // Search and highlight in title
+
             if(preg_match("/".$this->pattern."/i", $task->getTitle())){
                 $found = true;
                 $highlightedTask->setTitle(preg_replace('/'.$this->pattern.'/i', "<mark>$0</mark>", $task->getTitle()));
             }
 
-            // Search and highlight in description
+
             if(preg_match("/".$this->pattern."/i", $task->getDescription())){
                 $found = true;
                 $highlightedTask->setDescription(preg_replace('/'.$this->pattern.'/i', "<mark>$0</mark>", $task->getDescription()));
@@ -129,42 +131,21 @@ return $newTasks;
 
 
 function sort(string $sortBy){
-    if($sortBy ==="data"){
-        usort($this->tasks, fn($a, $b) => $a->getCreatedAt() <=> $b->getCreatedAt());
-
-    }else if($sortBy==="priority"){
-        $priorityOrder = ["wysoki" => 0, "średni" => 1, "niski" => 2];
-
-        usort($this->tasks,fn($a,$b) => $priorityOrder[$a->getPriority() <=> $b->getPriority()]);
-
-
-    }else if($sortBy==="title"){
-        usort($this->tasks, fn($a, $b) => $a->getTitle() <=> $b->getTitle());
-    }
-return $this->tasks;
-}
-
-function nextId(){
-        if(!empty($this->tasks)){
-            $c =0;
-           foreach($this->tasks as $task){
-               if($c < $task->getId()){
-                   $c = $task->getId();
-               }
-           }
-            return $c+1;
+        if($sortBy == "priority" || $sortBy == "data" || $sortBy == "title"){
+            $t = $this->tasks->prepare("SELECT * FROM tasks ORDER BY $sortBy");
+            $t->execute();
+            return $t->fetchAll();
         }else{
-            return 1;
+            echo "Invalid sort by $sortBy";
         }
 
-
 }
 
-function findAndChnageStatus(int $id,string $status):void{
-      $task = $this->find($id);
-      $task->changeStatus($status);
-    $_SESSION['tasks'] = $this->tasks;
 
+
+function findAndChnageStatus(int $id,string $status):void{
+        $t = $this->tasks->prepare("UPDATE tasks set status=:status WHERE id=:id");
+        $t->execute([':id'=>$id,':status'=>$status]);
 }
 
 
