@@ -9,9 +9,9 @@ class RecurringTask extends Task
     private $next;
 
 
-    function __construct($title, $createdBy, $description, $priority, $status, $tags, $category, $made_up_tags, $interval)
+    function __construct($type,$title, $createdBy, $description, $priority, $status, $tags, $category, $made_up_tags, $interval)
     {
-        parent::__construct($title, $createdBy, $description, $priority, $status, $tags, $category, $made_up_tags);
+        parent::__construct($type,$title, $createdBy, $description, $priority, $status, $tags, $category, $made_up_tags);
         $this->interval = $interval;
         $this->next = $this->nextOccurrence();
     }

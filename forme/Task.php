@@ -19,6 +19,7 @@ private $error_array = [];
     const PRIORITY_HIGH = "high";
     private $id;
     private $title;
+    private $type;
 
     private $category;
     private $description;
@@ -31,7 +32,7 @@ private $error_array = [];
 
     private $estimated_minutes;
 
-    function __construct($title, $createdBy,$estimated_minutes, $description = '', $priority= '', $status= '', $tags= '',$category="Praca", $made_up_tags='')
+    function __construct($type,$title, $createdBy,$estimated_minutes, $description = '', $priority= '', $status= '', $tags= '',$category="Praca", $made_up_tags='')
     {
         if ($priority == self::PRIORITY_LOW || $priority == self::PRIORITY_MEDIUM || $priority == self::PRIORITY_HIGH) {
             $this->priority = $priority;
@@ -99,15 +100,22 @@ private $error_array = [];
         $this->createdBy = $createdBy;
         $this->description = $description;
         $this->estimated_minutes = $estimated_minutes;
+        $this->type = $type;
         if(is_array($tags)){
             $this->tags = $tags;
-            $this->tags = array_merge($this->tags, explode(' ', $made_up_tags));
-            sort($this->tags);
-        }else {
-            $this->tags[] = !empty($tags) ? explode(',', $tags) : [];
-            $this->tags[] = !empty($made_up_tags) ? array_merge($this->tags, explode(' ',$made_up_tags )) : "empty tags";
-            sort($this->tags);
+            if(!empty($made_up_tags)) {
+                $this->tags = array_merge($this->tags, explode(' ', $made_up_tags));
+            }
+        } else {
+            // Handle string tags
+            $this->tags = !empty($tags) ? explode(',', $tags) : [];
+            if(!empty($made_up_tags)) {
+                $this->tags = array_merge($this->tags, explode(' ', $made_up_tags));
+            }
         }
+// Remove any empty values and sort
+        $this->tags = array_filter($this->tags);
+        sort($this->tags);
         $this->category = $category;
         $this->createdAt = date('Y-m-d H:i:s', time());
 
@@ -288,24 +296,36 @@ private $error_array = [];
 return $ar;
    }
 
-    /**
-     * @param mixed $id
-     */
+
+    public function getType()
+    {
+        return $this->type;
+    }
+
+
     public function setId($id): void
     {
         $this->id = $id;
     }
 
     static function fromArray(array $data){
+        $tags = json_decode($data["tags"] ?? [], true);
+        if(!is_array($tags)){
+            $tags = [];
+        }
         $task = new Task(
+            $data['type'],
             $data['title'],
             $data['created_by'],
             $data['estimated_minutes'] ?? '',
             $data['description'] ?? '',
             $data['priority'] ?? 'medium',
             $data['status'] ?? 'todo',
-            json_decode($data['tags'] ?? []),
+           $tags,
             $data['category'] ?? 'Praca',
+            ''
+
+
 
         );
         $task->setId($data['id']);

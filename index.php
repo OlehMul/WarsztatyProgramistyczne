@@ -59,14 +59,14 @@ if(isset($_POST['CHANGEstatus'])){
 if(isset($_POST['submit']) && !empty($_SESSION['user'])){
     $made_up_tags = $_POST["textTags"];
     if(isset($_POST['cycle'])){
-        $tc  = new \forme\RecurringTask($repo, $_POST['title'] ?? '', $_SESSION['user']->getLogin() ?? '', $_POST['estimated_minutes'], $_POST['description'] ?? '', $_POST['priority'] ?? '', $_POST['status'] ?? '', $_POST['tags'] ?? '', $_POST['category'], $made_up_tags,$_POST['interval']);
+        $tc  = new \forme\RecurringTask("rec", $_POST['title'] ?? '', $_SESSION['user']->getLogin() ?? '', $_POST['estimated_minutes'], $_POST['description'] ?? '', $_POST['priority'] ?? '', $_POST['status'] ?? '', $_POST['tags'] ?? '', $_POST['category'], $made_up_tags,$_POST['interval']);
         if (empty($tc->getErrorArray())) {
             $repo->add($tc);
             header('Location: index.php');
             exit();
         }
     }else {
-        $tt = new \forme\Task($_POST['title'], $auth->currentUser(),$_POST['estimated_minutes'], $_POST['description'] ?? '', $_POST['priority'] ?? '', $_POST['status'], $_POST['tags'] ?? '', $_POST['category'], $made_up_tags);
+        $tt = new \forme\Task("nor",$_POST['title'], $auth->currentUser(),$_POST['estimated_minutes'], $_POST['description'] ?? '', $_POST['priority'] ?? '', $_POST['status'], $_POST['tags'] ?? '', $_POST['category'], $made_up_tags);
         if (empty($tt->getErrorArray())) {
             $repo->add($tt);
             header('Location: index.php');
@@ -95,7 +95,6 @@ $total_minutes = array_sum(array_map(fn($t) => $t->getEstimatedMinutes(), $allTa
 
 
 
-//short form of thingy
 
 
 ?>
@@ -253,6 +252,11 @@ $total_minutes = array_sum(array_map(fn($t) => $t->getEstimatedMinutes(), $allTa
 
         <form method="post" action="index.php">
             <br>
+            <div>
+            <a href="forDataBase/import.php">Link to import your tasks</a>
+            </div>
+
+
             <label>FILTRY</label>
             <hr>
             <div>
@@ -361,14 +365,14 @@ $total_minutes = array_sum(array_map(fn($t) => $t->getEstimatedMinutes(), $allTa
 
 
 
-            <?php if ($displayTasks !== null): ?>
+            <?php if ($displayTasks !== null ): ?>
                 <?php $displayTasks = array_slice($displayTasks, 0, $pref->getNum()); ?>
 
                 <?php
                 if($pref->getReq() === "title"){
                     usort($displayTasks, fn($a, $b) => strcmp($a->getTitle(), $b->getTitle()));
                 } else if($pref->getReq() === "priority"){
-                    $priorityOrder = ["low" => 0, "medium" => 1, "high" => 2];
+                    $priorityOrder = ["high" => 0, "medium" => 1, "low" => 2];
                     usort($displayTasks, fn($a, $b) => $priorityOrder[$a->getPriority()] <=> $priorityOrder[$b->getPriority()]);
                 } else if($pref->getReq() === "data"){
                     usort($displayTasks, fn($a, $b) => strtotime($a->getCreatedAt()) <=> strtotime($b->getCreatedAt()));
@@ -377,10 +381,10 @@ $total_minutes = array_sum(array_map(fn($t) => $t->getEstimatedMinutes(), $allTa
 
                 <?php foreach ($displayTasks as $task): ?>
                     <div class="boxes">
-                        <h2><?= $task->getTitle() ?></h2>
+                        <h2><?= htmlspecialchars($task->getTitle()) ?></h2>
                         <p>Kategoria: <?= htmlspecialchars($task->getCategory()) ?></p>
-                        <p>Priorytet: <?= $task->getPriority() ?></p>
-                        <p>Opis: <?= $task->formatTaskDescription() ?></p>
+                        <p>Priorytet: <?= htmlspecialchars($task->getPriority()) ?></p>
+                        <p>Opis: <?= htmlspecialchars($task->formatTaskDescription()) ?></p>
                         <p>Tagi: <?php
                             $tags = $task->getTags();
                             if(!empty($tags)){
@@ -392,8 +396,8 @@ $total_minutes = array_sum(array_map(fn($t) => $t->getEstimatedMinutes(), $allTa
                             }
                             ?></p>
 
-                        <p>Status: <?php echo $task->getStatus() ?></p>
-                        <p>Czas: <?php echo $task->getEstimatedMinutes() ?> min</p>
+                        <p>Status: <?php echo htmlspecialchars($task->getStatus()) ?></p>
+                        <p>Czas: <?php echo htmlspecialchars($task->getEstimatedMinutes()) ?> min</p>
                         <p>Created by <?php echo htmlspecialchars($task->getCreatedBy()) ?></p>
                         <p>Created at <?php echo htmlspecialchars($task->getCreatedAt()) ?></p>
                         <?php if($task instanceof \forme\RecurringTask): ?>
