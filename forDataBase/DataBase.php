@@ -11,7 +11,7 @@ class DataBase{
 
 
    static function migrate(){
-    self::$db->exec("CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, title TEXT, description TEXT, priority TEXT, status TEXT, tags TEXT, created_at TEXT, created_by TEXT, interval TEXT NULL)");
+    self::$db->exec("CREATE TABLE IF NOT EXISTS tasks(id INTEGER PRIMARY KEY AUTOINCREMENT, type TEXT, title TEXT, description TEXT, priority TEXT, status TEXT, tags TEXT, created_at TEXT, created_by TEXT, interval TEXT NULL, estimated_minutes INTEGER, category TEXT)");
     self::$db->exec("CREATE TABLE IF NOT EXISTS users(id INTEGER PRIMARY KEY AUTOINCREMENT, login TEXT UNIQUE, password_hash TEXT, created_at TEXT)");
 
     }
@@ -23,7 +23,7 @@ class DataBase{
                     PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
                     PDO::ATTR_DEFAULT_FETCH_MODE => PDO::FETCH_ASSOC
                 ];
-                self::$db = new PDO('sqlite:host=localhost;dbname=tasks', 'root', '', $options);
+                self::$db = new PDO('sqlite:'.__DIR__.'/tasks.db',null,null, $options);
 
 
 

@@ -2,6 +2,7 @@
 
 namespace forme;
 
+use forDataBase\DataBase;
 use function Sodium\add;
 
 class TaskRepository{
@@ -17,12 +18,12 @@ class TaskRepository{
 
 
 function add(Task $task){
-$t = $this->tasks->prepare("INSERT INTO tasks(type,title,description,priority,status,tags,created_at,created_by,interval) VALUES(:type,:title,:description,:priority,:status,:tags,:created_at,:created_by,:interval)");
+$t = $this->tasks->prepare("INSERT INTO tasks(type,title,description,priority,status,tags,created_at,created_by,interval,estimated_minutes,category) VALUES(:type,:title,:description,:priority,:status,:tags,:created_at,:created_by,:interval,:estimated_minutes,:category)");
 
 if($task instanceof RecurringTask){
-    $t->execute([':type' =>"1",':title'=>$task->getTitle(),':description'=>$task->getDescription(),':priority'=>$task->getPriority(),':status'=>$task->getStatus(),':tags'=>json_encode($task->getTags()),':created_at'=>$task->getCreatedAt(),':created_by'=>$task->getCreatedBy(),':interval'=>$task->getInterval()]);
+    $t->execute([':type' =>"rec",':title'=>$task->getTitle(),':description'=>$task->getDescription(),':priority'=>$task->getPriority(),':status'=>$task->getStatus(),':tags'=>json_encode($task->getTags()),':created_at'=>$task->getCreatedAt(),':created_by'=>$task->getCreatedBy(),':interval'=>$task->getInterval(),':estimated_minutes'=>$task->getEstimatedMinutes(), ':category'=>$task->getCategory()]);
 }else{
-    $t->execute([':type' =>"1",':title'=>$task->getTitle(),':description'=>$task->getDescription(),':priority'=>$task->getPriority(),':status'=>$task->getStatus(),':tags'=>json_encode($task->getTags()),':created_at'=>$task->getCreatedAt(),':created_by'=>$task->getCreatedBy(),]);
+    $t->execute([':type' =>$task->getType(),':title'=>$task->getTitle(),':description'=>$task->getDescription(),':priority'=>$task->getPriority(),':status'=>$task->getStatus(),':tags'=>json_encode($task->getTags()),':created_at'=>$task->getCreatedAt(),':created_by'=>$task->getCreatedBy(),':interval'=>'',':estimated_minutes'=>$task->getEstimatedMinutes(), ':category'=>$task->getCategory()]);
 }
 
 }
@@ -45,9 +46,17 @@ function all(){
 $t = $this->tasks->prepare("SELECT * FROM tasks");
 $t->execute();
 $a = $t->fetchAll();
+
 foreach($a as $ts){
-    $r[] = Task::fromArray($ts);
+    try {
+        $obj = Task::fromArray($ts);
+        $r[] = $obj;
+    } catch(\Throwable $e) {
+        var_dump($e->getMessage());
+    }
+
 }
+
 return $r;
 }
 function filterByStatus(string $status){
@@ -56,31 +65,37 @@ $t->execute([':status'=>$status]);
 return $t->fetchAll();
 }
 
-    function filterByTag($tag = null){
-        $tagToFilter = $tag ?? $this->tags;
-        if(empty($tagToFilter)){
-            return $this->tasks;
+function filterByTag($tag = ''){
+        if(empty($tag)){
+            return $this->all();
         }
 
-     $t = $this->tasks->prepare('SELECT FROM tasks WHERE tags LIKE :tag');
-        $t->execute([':tag'=>'%'.$tag.'%']);
-        return $t->fetchAll();
+     $t = $this->tasks->prepare('SELECT * FROM tasks WHERE tags LIKE :tag');
+            $t->execute([':tag'=>"%".$tag."%"]);
+        $res = $t->fetchAll();
+        $r=[];
+        foreach($res as $a){
+            $r[] = Task::fromArray($a);
+        }
+
+        return $r;
     }
     function searchPattern(){
         $newTasks = [];
-        foreach($this->tasks as $task){
+        $db = DataBase::get();
             $found = false;
-
-            $highlightedTask = clone $task;
-
-
-
-
-
 
 
             $highlightedTags = [];
-            foreach($task->getTags() as $tag){
+       /*     foreach($this->tasks->getTags() as $tag){
+                $os = $db->prepare("SELECT * FROM tasks WHERE tags LIKE :tag");
+                $os->execute([':tag'=>"%".preg_match("/".$this->pattern."/", $this->tasks->getTags())."%"]);
+                $r = $os->fetchAll();
+                foreach($r as $t){
+                    $newTasks[] = Task::fromArray($t);
+
+                }
+
                 if(preg_match("/".$this->pattern."/i", $tag)){
                     $found = true;
                     $highlightedTags[] = preg_replace('/'.$this->pattern.'/i', "<mark>$0</mark>", $tag);
@@ -88,39 +103,23 @@ return $t->fetchAll();
                 } else {
                     $highlightedTags[] = $tag;
                 }
+
             }
-            if($found){
-                $highlightedTask->setTags($highlightedTags);
-            }
+       */
 
+$os = $db->prepare ("SELECT * FROM tasks WHERE 
+            title LIKE :pattern OR 
+            description LIKE :pattern OR 
+            status LIKE :pattern OR 
+            priority LIKE :pattern OR 
+            tags LIKE :pattern");
 
-            if(preg_match("/".$this->pattern."/i", $task->getStatus())){
-                $found = true;
-                $highlightedTask->setStatus(preg_replace('/'.$this->pattern.'/i', "<mark>$0</mark>", $task->getStatus()));
-            }
+$os->execute([':pattern'=>"%".$this->pattern."%"]);
+$res = $os->fetchAll();
+foreach($res as $a){
+    $newTasks[] =Task::fromArray($a);
+}
 
-
-            if(preg_match("/".$this->pattern."/i", $task->getPriority())){
-                $found = true;
-                $highlightedTask->setPriority(preg_replace('/'.$this->pattern.'/i', "<mark>$0</mark>", $task->getPriority()));
-            }
-
-
-            if(preg_match("/".$this->pattern."/i", $task->getTitle())){
-                $found = true;
-                $highlightedTask->setTitle(preg_replace('/'.$this->pattern.'/i', "<mark>$0</mark>", $task->getTitle()));
-            }
-
-
-            if(preg_match("/".$this->pattern."/i", $task->getDescription())){
-                $found = true;
-                $highlightedTask->setDescription(preg_replace('/'.$this->pattern.'/i', "<mark>$0</mark>", $task->getDescription()));
-            }
-
-            if($found){
-                $newTasks[] = $highlightedTask;
-            }
-        }
         return $newTasks;
     }
 

@@ -20,6 +20,8 @@ if(isset($_POST['sub2'])) {
         $US = new \forme\User($user, $pass);
         header('Location: index.php');
         exit();
+    }else{
+
     }
 
 
@@ -62,6 +64,8 @@ if(isset($_POST['sub2'])) {
     </div>
     <button type="submit" name="sub2">Submit button</button>
 </div>
+
+    <a href="register.php">TO REGISTER</a>
 
 
 </form>
